@@ -86,7 +86,7 @@ function loadScene() {
         
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableZoom = false;
+  controls.enableZoom = true;
   controls.enablePan = false;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 2.5;
