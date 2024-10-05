@@ -13,6 +13,7 @@
 
         body {
             overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
 
         #space {
@@ -29,7 +30,6 @@
             position: relative;
             color: white;
             text-align: center;
-            font-family: 'Arial', sans-serif;
             padding: 50px;
         }
 
@@ -43,32 +43,63 @@
             margin-bottom: 30px;
         }
 
-        .nasa-button {
-            padding: 15px 30px;
-            background-color: #007BFF;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            cursor: pointer;
-			text-decoration: none;
+        .planets-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
         }
 
-        .nasa-button:hover {
-            background-color: #0056b3;
+        .planet {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .planet:hover {
+            transform: scale(1.1);
+        }
+
+        .planet.disabled {
+            filter: grayscale(100%);
+            cursor: not-allowed;
+        }
+
+        #planet1 {
+            background: radial-gradient(circle at 30% 30%, #4CAF50, #2E7D32);
+        }
+
+        #planet2 {
+            background: radial-gradient(circle at 30% 30%, #2196F3, #1565C0);
+        }
+
+        #rocket {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2.5s-4 2.5-4 7.5c0 3.5 2 4.5 2 5.5s-1 2-2 3c-1.022 1.022-2 2.5-2 3.5h12c0-1-0.978-2.478-2-3.5-1-1-2-2-2-3s2-2 2-5.5c0-5-4-7.5-4-7.5z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: rotate(45deg);
+            transition: left 2s ease, top 2s ease;
         }
     </style>
 </head>
-<body>
-
+<body data-initial-state="true">
     <canvas id="space"></canvas>
 
     <div class="content">
-        <h1>Exoplanet explorer</h1>
-        <p>Choose a planet to observe and determine if its habitable.</p>
-        <a class="nasa-button" href="/planet.html">Start Exploring</a>
-		
+        <h1>Exoplanet Explorer</h1>
+        <p>Choose a planet to observe and determine if it's habitable.</p>
+        <div class="planets-container">
+            <div id="planet1" class="planet" onclick="selectPlanet(1)"></div>
+            <div id="planet2" class="planet disabled" onclick="selectPlanet(2)"></div>
+        </div>
     </div>
+
+    <div id="rocket"></div>
 
     <script>
         const canvas = document.getElementById('space');
@@ -81,7 +112,6 @@
             canvas.height = window.innerHeight;
         }
 
-        // Create star objects
         function createStars() {
             for (let i = 0; i < starCount; i++) {
                 stars.push({
@@ -94,45 +124,90 @@
             }
         }
 
-        // Animate stars
         function animateStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             stars.forEach(star => {
-                // Move the star downwards (space travel effect)
                 star.y += star.speed;
-
-                // Reset star position when it goes off-screen
                 if (star.y > canvas.height) {
                     star.x = Math.random() * canvas.width;
                     star.y = 0;
                     star.radius = Math.random() * 1.5 + 0.5;
                     star.speed = Math.random() * 0.5 + 0.2;
                 }
-
-                // Draw the star
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
                 ctx.fill();
                 ctx.closePath();
             });
-
             requestAnimationFrame(animateStars);
         }
 
-        // Initialize the app
         window.addEventListener('load', () => {
             setupCanvas();
             createStars();
             animateStars();
+            initRocket();
         });
 
-        // Adjust canvas size on window resize
         window.addEventListener('resize', () => {
             setupCanvas();
         });
-    </script>
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
 
+        let rocketPosition = 0;
+        const rocket = document.getElementById('rocket');
+
+        function initRocket() {
+            const initialState = urlParams.get("planet") === '1';
+			rocketPosition = parseInt(urlParams.get("planet"))-1;
+            if (initialState === '1') {
+                localStorage.setItem('rocketPosition', rocketPosition);
+            }
+            updateRocketPosition();
+        }
+
+        function updateRocketPosition() {
+            const planet1 = document.getElementById('planet1');
+            const planet2 = document.getElementById('planet2');
+            
+            const planetPositions = [
+                planet1.getBoundingClientRect(),
+                planet2.getBoundingClientRect()
+            ];
+
+            const offset = { x: -15, y: 100 }; // Offset for positioning the rocket
+
+            // Calculate positions with offset
+            const positions = planetPositions.map(pos => ({
+                left: `${pos.left + pos.width / 2 + offset.x}px`,
+                top: `${pos.top + pos.height / 2 + offset.y}px`
+            }));
+
+            rocket.style.left = positions[rocketPosition].left;
+            rocket.style.top = positions[rocketPosition].top;
+
+            if (urlParams.get("planet") === '2') {
+                document.getElementById('planet2').classList.remove('disabled');
+            }
+        }
+
+        function selectPlanet(planetNumber) {
+            if (planetNumber === 2 && rocketPosition < 1) {
+                alert("You need to unlock this planet first!");
+                return;
+            }
+            
+            if (rocketPosition < 2) {
+                rocketPosition++;
+                localStorage.setItem('rocketPosition', rocketPosition);
+                updateRocketPosition();
+            }
+            
+            // Redirect to planet page (you'll need to implement this page)
+            window.location.href = `/planet.html?planet=${planetNumber}`;
+        }
+    </script>
 </body>
 </html>
-
