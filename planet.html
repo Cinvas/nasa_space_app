@@ -449,7 +449,12 @@
       gl_FragColor = vec4(light * color, alpha) * texture2D(pointTexture, gl_PointCoord);
     }
   </script>
-  <script type="module" src="/scripts/main.js"></script>
+<script>
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	var planetNr = parseInt(urlParams.get('planet'));
+</script>
+<script type="module" src="/scripts/main.js"></script>
 </body>
 
 </html>

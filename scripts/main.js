@@ -11,54 +11,108 @@ import { Atmosphere } from './atmosphere';
 
 window.onload = () => loadScene();
 
-const planetParams = {
-	type: { value: 2 },
-	radius: { value: 20.0 },
-	amplitude: { value: 0.9786 },
-	sharpness: { value: 0.74 },
-	offset: { value: -0.132 },
-	period: { value: 0.8949 },
-	persistence: { value: 0.443 },
-	lacunarity: { value: 2.106 },
-	octaves: { value: 7 },
-	undulation: { value: 0.0 },
-	ambientIntensity: { value: 0 },
-	diffuseIntensity: { value: 1.105 },
-	specularIntensity: { value: 2 },
-	shininess: { value: 21.1 },
-	lightDirection: { value: new THREE.Vector3(1, 1, 1) },
-	lightColor: { value: new THREE.Color(0xffffff) },
-	bumpStrength: { value: 1.0 },
-	bumpOffset: { value: 0.0001 },
-	color1: { value: new THREE.Color(0.8, 0.643, 0.435) },
-	color2: { value: new THREE.Color(0.53, 0.435, 0.294) },
-	color3: { value: new THREE.Color(0.33, 0.27, 0.1843) },
-	color4: { value: new THREE.Color(0.384, 0.313, 0.2156) },
-	color5: { value: new THREE.Color(0.262, 0.21, 0.146) },
-	transition2: { value: 0.3 },
-	transition3: { value: 0.215 },
-	transition4: { value: 0.372 },
-	transition5: { value: 1.2 },
-	blend12: { value: 0.366 },
-	blend23: { value: 0.152 },
-	blend34: { value: 0.104 },
-	blend45: { value: 0.168 }
-  }
-  
-  const atmosphereParams = {
-	particles: { value: 30742 },
-	minParticleSize: { value: 48.4 },
-	maxParticleSize: { value: 105.8 },
-	radius: { value: planetParams.radius.value + 1 },
-	thickness: { value: 0.7056 },
-	density: { value: 0.016 },
-	opacity: { value: 0.381 },
-	scale: { value: 20.967 },
-	color: { value: new THREE.Color(0xffffff) },
-	speed: { value: 0.0603 },
-	lightDirection: planetParams.lightDirection
-  };
-  
+if(planetNr == 1)
+{
+	var planetParams = {
+		type: { value: 2 },
+		radius: { value: 20.0 },
+		amplitude: { value: 0.9786 },
+		sharpness: { value: 0.74 },
+		offset: { value: -0.132 },
+		period: { value: 0.8949 },
+		persistence: { value: 0.443 },
+		lacunarity: { value: 2.106 },
+		octaves: { value: 7 },
+		undulation: { value: 0.0 },
+		ambientIntensity: { value: 0 },
+		diffuseIntensity: { value: 1.105 },
+		specularIntensity: { value: 2 },
+		shininess: { value: 21.1 },
+		lightDirection: { value: new THREE.Vector3(1, 1, 1) },
+		lightColor: { value: new THREE.Color(0xffffff) },
+		bumpStrength: { value: 1.0 },
+		bumpOffset: { value: 0.0001 },
+		color1: { value: new THREE.Color(0.8, 0.643, 0.435) },
+		color2: { value: new THREE.Color(0.53, 0.435, 0.294) },
+		color3: { value: new THREE.Color(0.33, 0.27, 0.1843) },
+		color4: { value: new THREE.Color(0.384, 0.313, 0.2156) },
+		color5: { value: new THREE.Color(0.262, 0.21, 0.146) },
+		transition2: { value: 0.3 },
+		transition3: { value: 0.215 },
+		transition4: { value: 0.372 },
+		transition5: { value: 1.2 },
+		blend12: { value: 0.366 },
+		blend23: { value: 0.152 },
+		blend34: { value: 0.104 },
+		blend45: { value: 0.168 }
+	  }
+	  
+	  var atmosphereParams = {
+		particles: { value: 30742 },
+		minParticleSize: { value: 48.4 },
+		maxParticleSize: { value: 105.8 },
+		radius: { value: planetParams.radius.value + 1 },
+		thickness: { value: 0.7056 },
+		density: { value: 0.016 },
+		opacity: { value: 0.381 },
+		scale: { value: 20.967 },
+		color: { value: new THREE.Color(0xffffff) },
+		speed: { value: 0.0603 },
+		lightDirection: planetParams.lightDirection
+	  };
+}
+else if(planetNr == 2)
+{
+	var planetParams = {
+		type: { value: 2 },
+		radius: { value: 20.0 },
+		amplitude: { value: 0.966 },
+		sharpness: { value: 3.155 },
+		offset: { value: 0.084 },
+		period: { value: 0.3876 },
+		persistence: { value: 0.533 },
+		lacunarity: { value: 1.844 },
+		octaves: { value: 8 },
+		undulation: { value: 0.0 },
+		ambientIntensity: { value: 0 },
+		diffuseIntensity: { value: 0.635 },
+		specularIntensity: { value: 0.39 },
+		shininess: { value: 25 },
+		lightDirection: { value: new THREE.Vector3(1, 1, 1) },
+		lightColor: { value: new THREE.Color(0xffffff) },
+		bumpStrength: { value: 0.754 },
+		bumpOffset: { value: 0.0001 },
+		color1: { value: new THREE.Color(0.9, 0.9, 0.314) },
+		color2: { value: new THREE.Color(0.58, 0.51, 0.412) },
+		color3: { value: new THREE.Color(0.58, 0.482, 0.216) },
+		color4: { value: new THREE.Color(0.678, 0.538, 0.244) },
+		color5: { value: new THREE.Color(0.51, 0.51, 0.496) },
+		transition2: { value: 1.656 },
+		transition3: { value: 0.215 },
+		transition4: { value: 0.372 },
+		transition5: { value: 1.2 },
+		blend12: { value: 0.58 },
+		blend23: { value: 0.152 },
+		blend34: { value: 0.104 },
+		blend45: { value: 0.168 }
+	  }
+	  
+	  var atmosphereParams = {
+		particles: { value: 16811 },
+		minParticleSize: { value: 23 },
+		maxParticleSize: { value: 138.6 },
+		radius: { value: planetParams.radius.value + 1 },
+		thickness: { value: 0.1 },
+		density: { value: -0.46 },
+		opacity: { value: 0.238 },
+		scale: { value: 18.241 },
+		color: { value: new THREE.Color(0xffffff) },
+		speed: { value: 0.0004 },
+		lightDirection: planetParams.lightDirection
+	  };
+}
+
+
 
 function loadScene() {
   console.log('loading scene');
