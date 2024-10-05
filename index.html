@@ -130,7 +130,7 @@
 
         .terminal-line {
             white-space: pre;
-            margin-left: 10px;
+            margin-left: 30px;
             animation: scrollText 25s linear infinite;
         }
 
@@ -143,14 +143,11 @@
             }
         }
 
-        /* NASA ASCII logo in the bottom-right corner */
+        /* NASA logo in the bottom-right corner */
         #nasa-logo {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 10px;
-            color: #00ff00;
-            text-align: right;
+            bottom: 30px;
+            right: 30px;
             z-index: 2;
         }
     </style>
@@ -179,10 +176,10 @@
             <div class="terminal-text">Error Error observatory telescope is about to crash the brom, type STOP to stop the telescope</div>
             <input type="text" id="terminal-input" placeholder="Type STOP" />
             <div id="confirmation">Telescope Stopped!</div>
-        </div>
+    </div>
     
 	<!-- Container for the NASA Logo -->
-	<div id="nasa-logo" style="position: absolute; bottom: 20px; right: 20px; z-index: 2; ">
+	<div id="nasa-logo">
     		<img src="nasa_logo.png" alt="NASA Logo" style="width: 150px; height: auto;">
 	</div>
 
