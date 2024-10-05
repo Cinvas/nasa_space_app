@@ -1,6 +1,85 @@
 <!doctype html>
 <html lang="en">
 
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procedural Planets</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_param_box.css"> 
+  <link rel="stylesheet" href="style_view_box.css"> 
+  <link rel="stylesheet" href="style_select_box.css"> 
+  
+</head>
+
+<div class="param-box">
+    <h2>Can this star support habitable planet?</h2>	
+    <label>Orbital period</label>
+	<br/>
+	<label id="param1-min-value">0</label>
+	<input id="param1" min="0" step="10" max="500" type="range"/>
+	<label id="param1-max-value">500</label>
+	<br/>
+	
+	<input id="unikalus_id_2" type="text"/>
+	
+	<br/>
+	<label>Orbital semi-major axis</label>
+	<br/>
+	<label id="param2-min-value">0</label>
+	<input id="param2" min="0" step="5" max="200" type="range"/>
+	<label id="param2-max-value">200</label>
+	<br/>
+	
+	<input id="unikalus_id_2" type="text"/>
+	
+	<script>
+	    // Event listener for updating the additional input values
+	    document.getElementById("param2").addEventListener("change", function() {
+	        document.getElementById("unikalus_id_2").value = document.getElementById("param1").value;
+	    });
+	
+	    document.getElementById("param2").addEventListener("change", function() {
+	       document.getElementById("unikalus_id_2").value = document.getElementById("param2").value;
+	    });
+	</script>
+	<br/>
+	<button type="check_button">Submit</button>
+</div>
+
+<!-- INSERT VIEW BOX -->
+<div class="view-box">
+    <h2>INFO BOX</h2>
+    <label>Solar mass:</label>
+    <br/>
+    <label>Stellar effective temperature:</label>
+</div>
+
+<!-- INSERT SELECT BOX -->
+<div class="select-box">
+    <img id="telescope" src="telescope.png" style="width: 64px; height: 64px">
+    <script> 
+        document.getElementById("telescope").addEventListener("click", function() {
+            alert('');
+    	})
+    </script>
+    
+    <img id="observatory" src="observatory.png" style="width: 64px; height: 64px">
+    <script>
+        document.getElementById("observatory").addEventListener("click", function() {
+	    alert('');
+     	})
+    </script>	
+ 
+    <img id="satellite" src="satellite.png" style="width: 64px; height: 64px">
+    <script>
+        document.getElementById("satellite").addEventListener("click", function() {
+            alert('');
+        })
+    </script>
+</div>
+
 <body>
   <div id="app"></div>
 
