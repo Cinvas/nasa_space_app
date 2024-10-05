@@ -1,7 +1,105 @@
-body {
+/* Set body and container styles */
+body, html {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow: hidden;
+    background: black;
 }
-.autoPlace {
-    display: none !important;
+
+/* Starry background animation */
+body {
+    background: url('stars-background.jpg') black;
+    background-size: cover;
+    background-attachment: fixed;
+    animation: starAnimation 200s linear infinite;
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+header h1 {
+    font-size: 3em;
+    margin: 0;
+    color: #fff;
+}
+
+/* Content section */
+.content {
+    text-align: center;
+    margin-top: 20vh;
+}
+
+.content h2 {
+    font-size: 2.5em;
+}
+
+.content p {
+    font-size: 1.2em;
+    margin: 20px 0;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #ff7f50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff4500;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Star Animation */
+@keyframes starAnimation {
+    0% {
+        background-position: 0px 0px;
+    }
+    100% {
+        background-position: -10000px 10000px;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .content h2 {
+        font-size: 2em;
+    }
+
+    .content p {
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
 }
 
