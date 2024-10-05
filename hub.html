@@ -77,12 +77,6 @@
 
         #rocket {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2.5s-4 2.5-4 7.5c0 3.5 2 4.5 2 5.5s-1 2-2 3c-1.022 1.022-2 2.5-2 3.5h12c0-1-0.978-2.478-2-3.5-1-1-2-2-2-3s2-2 2-5.5c0-5-4-7.5-4-7.5z"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: rotate(45deg);
             transition: left 2s ease, top 2s ease;
         }
     </style>
@@ -99,7 +93,7 @@
         </div>
     </div>
 
-    <div id="rocket"></div>
+    <div id="rocket"><img width="70px" src="png/rocket.png"></img></div>
 
     <script>
         const canvas = document.getElementById('space');
@@ -177,7 +171,7 @@
                 planet2.getBoundingClientRect()
             ];
 
-            const offset = { x: -15, y: 100 }; // Offset for positioning the rocket
+            const offset = { x: -29, y: 80 }; // Offset for positioning the rocket
 
             // Calculate positions with offset
             const positions = planetPositions.map(pos => ({
