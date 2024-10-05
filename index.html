@@ -51,11 +51,107 @@
             font-size: 1.2rem;
             border-radius: 5px;
             cursor: pointer;
-			text-decoration: none;
+            text-decoration: none;
         }
 
         .nasa-button:hover {
             background-color: #0056b3;
+        }
+
+        /* Popup Styles */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            padding: 30px;
+            box-shadow: inset 0 0 50px #00ff00;
+            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .terminal-text {
+            white-space: pre-wrap;
+            text-align: center;
+            z-index: 2;
+        }
+
+        #terminal-input {
+            width: 50%;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #00ff00;
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+        }
+
+        #confirmation {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+            color: #00ff00;
+            font-size: 20px;
+        }
+
+        /* Scrolling terminal lines in the background */
+        .terminal-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            color: #00ff00;
+            opacity: 0.5;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .terminal-line {
+            white-space: pre;
+            margin-left: 10px;
+            animation: scrollText 25s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        /* NASA ASCII logo in the bottom-right corner */
+        #nasa-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 10px;
+            color: #00ff00;
+            text-align: right;
+            z-index: 2;
         }
     </style>
 </head>
@@ -67,8 +163,28 @@
         <h1>Welcome to NASA Space App</h1>
         <p>Explore the Universe from the comfort of your browser.</p>
         <a class="nasa-button" href="/hub.html">Start Exploring</a>
-		
     </div>
+
+    <!-- Popup HTML -->
+    <div id="popup">
+        <div class="terminal-background">
+            <div class="terminal-line">Initializing observatory sequence...</div>
+            <div class="terminal-line">Connecting to the telescope...</div>
+            <div class="terminal-line">Error: Telescope motor failure detected</div>
+            <div class="terminal-line">Restarting systems...</div>
+            <div class="terminal-line">Warning: Observatory about to crash...</div>
+        </div>
+	<div id="popup-content">
+            <div class="terminal-text">Error Error observatory telescope is about to crash the brom, type STOP to stop the telescope</div>
+            <input type="text" id="terminal-input" placeholder="Type STOP" />
+            <div id="confirmation">Telescope Stopped!</div>
+        </div>
+    
+	<!-- Container for the NASA Logo -->
+	<div id="nasa-logo" style="position: absolute; bottom: 20px; right: 20px; z-index: 2; ">
+    		<img src="nasa_logo.png" alt="NASA Logo" style="width: 150px; height: auto;">
+	</div>
+
 
     <script>
         const canvas = document.getElementById('space');
@@ -125,6 +241,25 @@
             setupCanvas();
             createStars();
             animateStars();
+
+            // Show the popup after 1 second
+            setTimeout(() => {
+                document.getElementById('popup').style.display = 'flex';
+                // Reset the input value
+                document.getElementById('terminal-input').value = '';
+                document.getElementById('confirmation').style.display = 'none'; // Hide confirmation initially
+            }, 1000);
+        });
+
+        // Handle user input for the terminal
+        document.getElementById('terminal-input').addEventListener('keyup', function(e) {
+            if (e.target.value.toLowerCase() === 'stop') {
+		    if (e.key.toLowerCase() === "enter") {
+                	document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
+                	document.getElementById('terminal-input').value = ''; // Clear input
+		    	document.getElementById('popup').style.display = 'none';
+		    } 
+            }
         });
 
         // Adjust canvas size on window resize
