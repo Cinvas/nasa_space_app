@@ -77,25 +77,39 @@
   <body style="text-align:left"> 
   </head>
 
+<head>
 </head>
-<script>
-	const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
-    var zoom = parseInt(urlParams.get('zoom'));
-</script>
-<div class="param-box">
-    
-    <h2>Can this star support a habitable planet?</h2>
-    <!-- PARAM1 -->
-    <br />
-    <label id="param1-min-value">No</label>
-    <input id="param1" min="0" max="1" type="range" value="0" />
-    <label id="param1-max-value">Yes</label>
-    <br />
-    <!-- <span id="param1-value-box">Value: <span id="param1-value">No</span></span> -->
-    <br />
 
+<body>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
+        var zoom = parseInt(urlParams.get('zoom'));
+
+        var question_text;
+        switch (planetNr) {
+            case 1:
+                question_text = "Can this star support a habitable planet?";
+                break;
+            case 2:
+                question_text = "Could the exoplanet have survivable conditions?";
+                break;
+            default:
+                question_text = "Exploring planets!"; // Default question for other cases
+            }
+         document.getElementById("dynamic-header").innerText = question_text;
+    </script>
+    <div class="param-box">
+        <h2 id="dynamic-header"></h2> <!-- This will show the question text -->
+
+        <!-- PARAM1 -->
+        <br />
+        <label id="param1-min-value">No</label>
+        <input id="param1" min="0" max="1" type="range" value="0" />
+        <label id="param1-max-value">Yes</label>
+        <br />
+   
     <script>
         // Event listener for updating the displayed value for param1
         document.getElementById("param1").addEventListener("input", function () {
@@ -537,7 +551,7 @@
     }
   </script>
 <script>
-	
+
 	if(zoom == 1)
 	{
 		document.getElementById("observatory").className = "selectable";
