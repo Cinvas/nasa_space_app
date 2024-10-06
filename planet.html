@@ -146,9 +146,9 @@
 		var zoom = parseInt(urlParams.get('zoom'));
 		let url = new URL(window.location.href);
 		const planetData = [
-				{ solarMass: 0.72, stellarTemp: 4967 },
-				{ solarMass: 0.79, stellarTemp: 4842 },
-				// Add more planets here
+			{ solarMass: 0.72, stellarTemp: 4967, orbitalPeriod: 267, orbitalSMaxis: 0.7279, planetaryRadius: 1.46, planetaryMass: "<35"},
+			{ solarMass: 0.79, stellarTemp: 4842, orbitalPeriod: 122, orbitalSMaxis: 0.42, planetaryRadius: 1.67, planetaryMass: "<36"},
+			// Add more planets here
 			];
 		const questions = [
 			"Could this star support habitable planets?",
@@ -174,12 +174,20 @@
 				url.searchParams.set('zoom', '2');
 				url = url.toString();
 				document.getElementById('dynamic-header').textContent = questions[1];
+				var orbitalPeriod = planetData[0].orbitalPeriod;
+                var orbitalSMaxis = planetData[0].orbitalSMaxis;
+            	document.getElementById('solar-mass').textContent = `Orbital period [days]: ${orbitalPeriod}`;
+                document.getElementById('stellar-temp').textContent = `Orbital semi-majox axis [au]: ${orbitalSMaxis}`;
 			}
 			else if(zoom === 2)
 			{
 				url = new URL('/console.html', window.location.origin);
     			url.searchParams.set('planet', '2');
 				document.getElementById('dynamic-header').textContent = questions[2];
+				var planetaryRadius = planetData[0].planetaryRadius;
+                var planetaryMass = planetData[0].planetaryMass;
+                document.getElementById('solar-mass').textContent = `Planetary radius [Earth radius]: ${planetaryRadius}`;
+				document.getElementById('stellar-temp').textContent = `Planetary mass [Earth mass]: ${planetaryMass}`;
 			}
 		}
 		else if(planetNr === 2)
@@ -199,12 +207,20 @@
 				url.searchParams.set('zoom', '2');
 				url = url.toString();
 				document.getElementById('dynamic-header').textContent = questions[1];
+				var orbitalPeriod = planetData[1].orbitalPeriod;
+                var orbitalSMaxis = planetData[1].orbitalSMaxis;
+                document.getElementById('solar-mass').textContent = `Orbital period [days]: ${orbitalPeriod}`;
+                document.getElementById('stellar-temp').textContent = `Orbital semi-majox axis [au]: ${orbitalSMaxis}`;
 			}
 			else if(zoom === 2)
 			{
 				url = new URL('/console.html', window.location.origin);
     			url.searchParams.set('planet', '2');
 				document.getElementById('dynamic-header').textContent = questions[2];
+				var planetaryRadius = planetData[1].planetaryRadius;
+                var planetaryMass = planetData[1].planetaryMass;
+                document.getElementById('solar-mass').textContent = `Planetary radius [Earth radius]: ${planetaryRadius}`;
+                document.getElementById('stellar-temp').textContent = `Planetary mass [Earth mass]: ${planetaryMass}`;
 			}
 		}
 
