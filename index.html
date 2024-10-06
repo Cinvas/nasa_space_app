@@ -160,9 +160,7 @@
 </head>
 <body>
 
-    <canvas id="space"></canvas>
-
-<div class="content">
+<!--<div class="content">
     <h1>Welcome to the virtual exoplanet observatory!</h1>
     <p>
         Congratulations! On your first day as an astronomy intern, you saved the main observatory telescope from crashing. 
@@ -178,7 +176,7 @@
 
     <a class="nasa-button" href="/hub.html?planet=1">Start Exploring</a>
     <br/>           
-</div>
+</div>-->
 
     <!-- Popup HTML -->
     <div id="popup" class="display screen scanlines">
@@ -199,61 +197,10 @@
 
 
     <script>
-        const canvas = document.getElementById('space');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
-        let starCount = 200;
-
-        function setupCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        // Create star objects
-        function createStars() {
-            for (let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5 + 0.5,
-                    speed: Math.random() * 0.5 + 0.2,
-                    alpha: Math.random() * 0.5 + 0.5
-                });
-            }
-        }
-
-        // Animate stars
-        function animateStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(star => {
-                // Move the star downwards (space travel effect)
-                star.y += star.speed;
-
-                // Reset star position when it goes off-screen
-                if (star.y > canvas.height) {
-                    star.x = Math.random() * canvas.width;
-                    star.y = 0;
-                    star.radius = Math.random() * 1.5 + 0.5;
-                    star.speed = Math.random() * 0.5 + 0.2;
-                }
-
-                // Draw the star
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                ctx.fill();
-                ctx.closePath();
-            });
-
-            requestAnimationFrame(animateStars);
-        }
+        
 
         // Initialize the app
         window.addEventListener('load', () => {
-            setupCanvas();
-            createStars();
-            animateStars();
-
             // Show the popup after 1 second
             setTimeout(() => {
                 document.getElementById('popup').style.display = 'flex';
@@ -271,6 +218,9 @@
                 	document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
                 	document.getElementById('terminal-input').value = ''; // Clear input
 		    		document.getElementById('popup').style.display = 'none';
+					let url = new URL(window.location.href);
+					url = url.toString()+"console.html?planet=1";
+					window.location.href = url;
 		    } 
             }
         });
