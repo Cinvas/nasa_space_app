@@ -27,42 +27,93 @@
         opacity: 0.5; /* Make it semi-transparent */
         pointer-events: none; /* Disable click events */
     }
-  </style>
+	
+  /* Popup container - can be anything you want */
+  .popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
   
+  /* The actual popup */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -15px;
+    left: 225px;
+    margin-left: -80px;
+  }
+  
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+  </style>
+  </head>
+  <body style="text-align:left"> 
+  </head>
+
 </head>
 <div class="param-box">
-    <h2>Can this star support habitable planet?</h2>	
-    <label>Orbital period</label>
-	<br/>
-	<label id="param1-min-value">0</label>
-	<input id="param1" min="0" step="10" max="500" type="range"/>
-	<label id="param1-max-value">500</label>
-	<br/>
+    
+    <h2>Can this star support a habitable planet?</h2>
+    <!-- PARAM1 -->
+    <br />
+    <label id="param1-min-value">No</label>
+    <input id="param1" min="0" max="1" type="range" value="0" />
+    <label id="param1-max-value">Yes</label>
+    <br />
+    <!-- <span id="param1-value-box">Value: <span id="param1-value">No</span></span> -->
+    <br />
+
+    <script>
+        // Event listener for updating the displayed value for param1
+        document.getElementById("param1").addEventListener("input", function () {
+            // Get the value of the range (0 or 1)
+            const value = parseInt(this.value); // 0 corresponds to "No", 1 corresponds to "Yes"
+            const displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
+            document.getElementById("param1-value").textContent = displayedValue; // Update the displayed value
+        });
+    </script>
+
+    <br/>
+	<div class="popup" onclick="myFunction()">Check answer
+	        <span class="popuptext" id="myPopup">
+	            Values are correct!<br/>
+	            Proceed to the next stage
+	        </span>
+	    </div>
 	
-	<input id="unikalus_id_2" type="text"/>
-	
-	<br/>
-	<label>Orbital semi-major axis</label>
-	<br/>
-	<label id="param2-min-value">0</label>
-	<input id="param2" min="0" step="5" max="200" type="range"/>
-	<label id="param2-max-value">200</label>
-	<br/>
-	
-	<input id="unikalus_id_2" type="text"/>
-	
-	<script>
-	    // Event listener for updating the additional input values
-	    document.getElementById("param2").addEventListener("change", function() {
-	        document.getElementById("unikalus_id_2").value = document.getElementById("param1").value;
-	    });
-	
-	    document.getElementById("param2").addEventListener("change", function() {
-	       document.getElementById("unikalus_id_2").value = document.getElementById("param2").value;
-	    });
-	</script>
-	<br/>
-	<button type="check_button">Submit</button>
+	    <script>
+	        function myFunction() {
+	            var popup = document.getElementById("myPopup");
+	            popup.classList.toggle("show");
+	        }
+	    </script>
 </div>
 
 <!-- INSERT VIEW BOX -->
