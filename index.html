@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA Space App</title>
+	<link rel="stylesheet" type="text/css" href="scanlines.css" />
+	<link rel="stylesheet" type="text/css" href="displays.css" />
     <style>
         * {
             margin: 0;
@@ -121,7 +123,7 @@
             height: 100%;
             z-index: 1;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
+            font-size: 18px;
             color: #00ff00;
             opacity: 0.5;
             overflow: hidden;
@@ -131,16 +133,8 @@
         .terminal-line {
             white-space: pre;
             margin-left: 30px;
+			margin-top: 30px;
             animation: scrollText 25s linear infinite;
-        }
-
-        @keyframes scrollText {
-            0% {
-                transform: translateY(100%);
-            }
-            100% {
-                transform: translateY(-100%);
-            }
         }
 
         /* NASA logo in the bottom-right corner */
@@ -164,17 +158,14 @@
     </div>
 
     <!-- Popup HTML -->
-    <div id="popup">
+    <div id="popup" class="display screen scanlines">
         <div class="terminal-background">
-            <div class="terminal-line">Initializing observatory sequence...</div>
-            <div class="terminal-line">Connecting to the telescope...</div>
-            <div class="terminal-line">Error: Telescope motor failure detected</div>
-            <div class="terminal-line">Restarting systems...</div>
-            <div class="terminal-line">Warning: Observatory about to crash...</div>
+            <div class="terminal-line" id="terminal-line"></div>
         </div>
 	<div id="popup-content">
-            <div class="terminal-text">Error Error observatory telescope is about to crash the brom, type STOP to stop the telescope</div>
-            <input type="text" id="terminal-input" placeholder="Type STOP" />
+            <div class="terminal-text">Error! Observatory telescope is about to crash!</div>
+            <div class="terminal-text">Type STOP to stop the telescope.</div>
+			<input type="text" id="terminal-input" placeholder="Type STOP" />
             <div id="confirmation">Telescope Stopped!</div>
     </div>
     
@@ -246,6 +237,7 @@
                 // Reset the input value
                 document.getElementById('terminal-input').value = '';
                 document.getElementById('confirmation').style.display = 'none'; // Hide confirmation initially
+				typeTerminalLines();
             }, 1000);
         });
 
@@ -255,10 +247,87 @@
 		    if (e.key.toLowerCase() === "enter") {
                 	document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
                 	document.getElementById('terminal-input').value = ''; // Clear input
-		    	document.getElementById('popup').style.display = 'none';
+		    		document.getElementById('popup').style.display = 'none';
 		    } 
             }
         });
+
+		// Terminal lines to be typed
+        const terminalLines = [
+    ">> [Initial Sequence]",
+    ">> Initializing observatory sequence...",
+    ">> Connecting to the telescope...",
+    ">> **ERROR:** Telescope motor failure detected.",
+
+    ">> [System Recovery Attempt]",
+    ">> Restarting systems...",
+    ">> **WARNING:** Observatory about to crash...",
+    ">> Diverting power to auxiliary systems...",
+    ">> **ERROR:** Unable to establish connection to backup systems.",
+
+    ">> [Emergency Protocols Activated]",
+    ">> Deploying emergency protocols...",
+    ">> **CRITICAL FAILURE:** Data link to satellite lost.",
+    ">> Searching for available rescue units...",
+    ">> **SIGNAL WEAK:** Attempting to boost transmission...",
+
+    ">> [Connection Reestablished]",
+    ">> Connection established with Earth monitoring station.",
+    ">> **RECEIVING INTERFERENCE:** From cosmic rays...",
+    ">> **WARNING:** Solar flare detected in quadrant 23-A.",
+
+    ">> [Maneuvers to Avoid Danger]",
+    ">> Calculating new trajectory to avoid debris field...",
+    ">> Attempting manual override...",
+    ">> **CRITICAL SYSTEM OVERLOAD:** Venting excess energy...",
+    ">> **ALERT:** Radiation levels exceeding safe limits...",
+
+    ">> [Emergency Shutdown]",
+    ">> Emergency shutdown initiated...",
+    ">> Cooling systems offline. Rebooting...",
+    ">> **REBOOT SUCCESSFUL:** Monitoring systems stabilized.",
+
+    ">> [Troubleshooting Phase]",
+    ">> **ERROR:** Inconsistent data received from probe.",
+    ">> Running diagnostics...",
+    ">> **ERROR DETECTED:** In star-tracker alignment.",
+    ">> Recalibrating star-tracker system...",
+    ">> **ERROR:** Unable to lock on celestial target.",
+
+    ">> [Backup Navigation]",
+    ">> Reverting to backup navigation protocols...",
+    ">> **WARNING:** Power grid fluctuation detected.",
+    ">> Rebalancing energy distribution...",
+
+    ">> [Data Transmission Issues]",
+    ">> **TELEMETRY DATA:** 25% packet loss, attempting re-transmission...",
+    ">> Transmission secured. Data integrity restored.",
+
+    ">> [Operations Resuming]",
+    ">> Telescope alignment error resolved. Resuming operations...",
+    ">> Mission control awaiting further instructions..."
+];
+
+        let currentLine = 0;
+        let currentChar = 0;
+
+        // Function to type out the terminal lines with a typing animation
+        function typeTerminalLines() {
+            const terminalText = document.getElementById('terminal-line');
+            if (currentLine < terminalLines.length) {
+                if (currentChar < terminalLines[currentLine].length) {
+                    terminalText.textContent += terminalLines[currentLine].charAt(currentChar);
+                    currentChar++;
+                    setTimeout(typeTerminalLines, 10); // Speed of typing
+                } else {
+                    terminalText.textContent += "\n"; // Move to the next line
+                    currentLine++;
+                    currentChar = 0;
+                    setTimeout(typeTerminalLines, 10); // Pause before next line
+                }
+            }
+        }
+
 
         // Adjust canvas size on window resize
         window.addEventListener('resize', () => {
