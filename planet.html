@@ -26,6 +26,7 @@
     user-select: none;
   }
   
+<<<<<<< HEAD
   /* The actual popup */
   .popup .popuptext {
     visibility: hidden;
@@ -64,6 +65,9 @@
   <body style="text-align:left"> 
   </head>
 
+=======
+</head>
+>>>>>>> eed15734a0562e8962f3a4aff3975658dc499fe7
 <div class="param-box">
     
     <h2>Can this star support a habitable planet?</h2>
@@ -115,21 +119,27 @@
     <img id="telescope" src="telescope.png" style="width: 64px; height: 64px">
     <script> 
         document.getElementById("telescope").addEventListener("click", function() {
-            alert('');
+            let url = new URL(window.location.href);
+			url.searchParams.set('zoom', '0');
+			window.location.href = url.toString();
     	})
     </script>
     
     <img id="observatory" src="observatory.png" style="width: 64px; height: 64px">
     <script>
         document.getElementById("observatory").addEventListener("click", function() {
-	    alert('');
+	    	let url = new URL(window.location.href);
+			url.searchParams.set('zoom', '1');
+			window.location.href = url.toString();
      	})
     </script>	
  
     <img id="satellite" src="satellite.png" style="width: 64px; height: 64px">
     <script>
         document.getElementById("satellite").addEventListener("click", function() {
-            alert('');
+            let url = new URL(window.location.href);
+			url.searchParams.set('zoom', '2');
+			window.location.href = url.toString();
         })
     </script>
 </div>
@@ -507,6 +517,7 @@
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	var planetNr = parseInt(urlParams.get('planet'));
+	var zoom = parseInt(urlParams.get('zoom'));
 </script>
 <script type="module" src="/scripts/main.js"></script>
 </body>
