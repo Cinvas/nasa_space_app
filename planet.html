@@ -177,43 +177,42 @@
     <label id="param1-max-value">Yes</label>
     <br />
 	-->
-    <!-- Display popup on button click 
+	<!--  Display popup on button click  -->
     <div class="popup" onclick="myFunction()">Check answer</div>
     <span class="popuptext" id="myPopup"></span>
-    -->
-    <script>
+<script>
         let displayedValue = "No"; // Default value
 
         // Event listener for updating the displayed value for param1
         document.getElementById("param1").addEventListener("input", function () {
-            // Get the value of the range (0 or 1)
             const value = parseInt(this.value); // 0 corresponds to "No", 1 corresponds to "Yes"
             displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
             console.log("Slider value:", displayedValue); // For debugging
         });
-	
-        function myFunction() {
-	       var popup = document.getElementById("myPopup");
-	       popup.classList.toggle("show");
-	       if (displayedValue === "Yes") {
-                    popup.textContent = "Values are correct! Proceed to the next stage.";
-                    popup.classList.add("show"); // Show popup
-                } else {
-                    popup.textContent = "The answer is incorrect. Please correct it.";
-                    popup.classList.add("show"); // Show popup
-                }
 
-                // Automatically hide popup after a few seconds
-                setTimeout(function () {
-                    popup.classList.remove("show");
-                }, 3000); // Hide after 3 seconds
-	   }
-	   function nextLevel() {
-		let url = new URL(window.location.href);
-		url.searchParams.set('zoom', '1');
-		window.location.href = url.toString();
-           }
-	    </script>
+        function myFunction() {
+            const popup = document.getElementById("myPopup");
+
+            if (displayedValue === "Yes") {
+                popup.textContent = "Values are correct! Proceed to the next stage.";
+                popup.classList.add("show"); // Show popup
+            } 
+	    if (displayedValue === "No") {
+                popup.textContent = "The answer is incorrect. Please correct it.";
+                popup.classList.add("show"); // Show popup
+            }
+        }
+
+        // Function to move to the next level
+        function nextLevel() {
+            if (displayedValue === "Yes") {
+                // Example of setting a parameter and navigating
+                let url = new URL(window.location.href);
+                url.searchParams.set('zoom', '1'); // Add 'zoom' query parameter
+                window.location.href = url; // Navigate to the updated URL
+            }
+        }
+    </script>   
 </div>
 
 <!-- INSERT VIEW BOX -->
