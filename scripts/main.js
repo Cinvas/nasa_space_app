@@ -8,6 +8,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import createUI from './ui';
 import create_param_box from './param_box'; // CREATING NEW PARAM BOX
 import { Atmosphere } from './atmosphere';
+import { randFloat } from 'three/src/math/MathUtils.js';
 
 window.onload = () => loadScene();
 
@@ -142,6 +143,8 @@ function loadScene() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableZoom = true;
+  controls.maxDistance = 200;
+  controls.minDistance = 30;
   controls.enablePan = false;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 2.5;
@@ -186,13 +189,55 @@ function loadScene() {
   const atmosphere = new Atmosphere(atmosphereParams);
   planet.add(atmosphere);
 
-  function animate() {
-    requestAnimationFrame(animate);
-    atmosphere.material.uniforms.time.value = clock.getElapsedTime();
-    atmosphere.rotation.y += 0.0002;
-    controls.update();
-    composer.render();
-    stats.update();
+  function animate()
+  {
+		requestAnimationFrame(animate);
+	
+		// Get the distance from the camera to the planet
+		const cameraDistance = camera.position.distanceTo(planet.position);
+	
+		// Adjust the atmosphere's scale based on the camera distance
+		if(zoom == 0)
+		{
+			controls.enableZoom = false;
+			controls.enableRotate = false;
+			controls.autoRotate = false;
+			atmosphere.visible = false;
+			planet.scale.set(0.01, 0.01, 0.01);
+			planetParams.diffuseIntensity.value = randFloat(2,10);
+			planetParams.amplitude.value = 0;
+			planetParams.sharpness.value = 0;
+			renderer.setPixelRatio(0.3);
+		}
+		else if(zoom == 1)
+		{
+			controls.enableZoom = false;
+			controls.enableRotate = true;
+			controls.autoRotate = true;
+			atmosphere.visible = false;
+			planet.scale.set(0.05, 0.05, 0.05);
+			planetParams.amplitude.value = 0.8;
+			renderer.setPixelRatio(0.5);
+		}
+		else if(zoom == 2)
+		{
+			const atmosphereScaleFactor = 50/cameraDistance; // Adjust this factor based on how you want the scaling to behave
+			if(cameraDistance > 100)
+				atmosphere.scale.set(0, 0, 0)
+			else if(cameraDistance > 50 && cameraDistance < 100)
+				atmosphere.scale.set(Math.sqrt(atmosphereScaleFactor), Math.sqrt(atmosphereScaleFactor),Math.sqrt(atmosphereScaleFactor))
+			else
+				atmosphere.scale.set(1, 1, 1)
+		
+			atmosphere.material.uniforms.time.value = clock.getElapsedTime();
+			atmosphere.rotation.y += 0.0002;
+		
+		}
+		
+	
+		controls.update();
+		composer.render();
+		stats.update();
   }
 
   // Events
