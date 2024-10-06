@@ -9,7 +9,25 @@
   <link rel="stylesheet" href="style_planet.css">
   <link rel="stylesheet" href="style_param_box.css"> 
   <link rel="stylesheet" href="style_view_box.css"> 
-  <link rel="stylesheet" href="style_select_box.css"> 
+  <link rel="stylesheet" href="style_select_box.css">
+  <style>
+	.selectable {
+		margin-top: 5px;
+		margin-left: 5px;
+        cursor: pointer;
+        transition: transform 0.2s; /* Smooth scaling effect */
+    }
+
+    .selectable:hover {
+        transform: scale(1.1); /* Scale up on hover */
+    }
+
+    /* Style for greyed out/unpressable images */
+    .selectable.hidden {
+        opacity: 0.5; /* Make it semi-transparent */
+        pointer-events: none; /* Disable click events */
+    }
+  </style>
   
 </head>
 <div class="param-box">
@@ -57,7 +75,7 @@
 
 <!-- INSERT SELECT BOX -->
 <div class="select-box">
-    <img id="telescope" src="telescope.png" style="width: 64px; height: 64px">
+    <img id="telescope" src="telescope.png" class="selectable" style="width: 64px; height: 64px">
     <script> 
         document.getElementById("telescope").addEventListener("click", function() {
             let url = new URL(window.location.href);
@@ -66,7 +84,7 @@
     	})
     </script>
     
-    <img id="observatory" src="observatory.png" style="width: 64px; height: 64px">
+    <img id="observatory" src="observatory.png" class="selectable hidden" style="width: 64px; height: 64px">
     <script>
         document.getElementById("observatory").addEventListener("click", function() {
 	    	let url = new URL(window.location.href);
@@ -75,7 +93,7 @@
      	})
     </script>	
  
-    <img id="satellite" src="satellite.png" style="width: 64px; height: 64px">
+    <img id="satellite" src="satellite.png" class="selectable hidden" style="width: 64px; height: 64px">
     <script>
         document.getElementById("satellite").addEventListener("click", function() {
             let url = new URL(window.location.href);

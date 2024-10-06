@@ -3,8 +3,8 @@
     position: absolute; /* Allow absolute positioning */
     top: 5px; /* Distance from the top of the window */
     right: 5px; /* Distance from the right side of the window */
-    width: 204px; /* Width of the parameter box */
-    height: 65px; /* Height of the parameter box */
+    width: 220px; /* Width of the parameter box */
+    height:75px; /* Height of the parameter box */
     background-color: rgba(255, 255, 255, 0.8); /* Background with some transparency */
     padding: 5px; /* Padding inside the box */
     border-radius: 5px; /* Rounded corners */
