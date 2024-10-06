@@ -6,184 +6,203 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Procedural Planets</title>
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="style_planet.css">
-  <link rel="stylesheet" href="style_param_box.css"> 
-  <link rel="stylesheet" href="style_view_box.css"> 
+  <link rel="stylesheet" href="style_param_box.css">
+  <link rel="stylesheet" href="style_view_box.css">
   <link rel="stylesheet" href="style_select_box.css">
+
+  <!-- Custom Inline Styles -->
   <style>
-	.selectable {
-		margin-top: 5px;
-		margin-left: 5px;
-        cursor: pointer;
-        transition: transform 0.2s; /* Smooth scaling effect */
+    .selectable {
+      margin-top: 5px;
+      margin-left: 5px;
+      cursor: pointer;
+      transition: transform 0.2s; /* Smooth scaling effect */
     }
 
     .selectable:hover {
-        transform: scale(1.1); /* Scale up on hover */
+      transform: scale(1.1); /* Scale up on hover */
     }
 
     /* Style for greyed out/unpressable images */
     .selectable.hidden {
-        opacity: 0.5; /* Make it semi-transparent */
-        pointer-events: none; /* Disable click events */
+      opacity: 0.5; /* Make it semi-transparent */
+      pointer-events: none; /* Disable click events */
     }
 
-  /* Popup container - can be anything you want */
-  .popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* The actual popup */
-  .popup .popuptext {
-    visibility: hidden;
-    width: 200px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: -15px;
-    left: 225px;
-    margin-left: -80px;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
-  </style>
-  </head>
-  <body style="text-align:left"> 
-  </head>
+    /* Popup container - can be anything you want */
+    .popup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-<head>
+    /* The actual popup */
+    .popup .popuptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: -15px;
+      left: 225px;
+      margin-left: -80px;
+    }
+
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+    }
+
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 
+<body style="text-align:left">
 
-<body>
-    <script>
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
-        var zoom = parseInt(urlParams.get('zoom'));
+  <!-- Dynamic Question Header -->
+  <div class="param-box">
+    <h2 id="dynamic-header"></h2> <!-- This will show the question text -->
 
-        var question_text;
-        switch (planetNr) {
-            case 1:
-                question_text = "Can this star support a habitable planet?";
-                break;
-            case 2:
-                question_text = "Could the exoplanet have survivable conditions?";
-                break;
-            default:
-                question_text = "Exploring planets!"; // Default question for other cases
-            }
-         document.getElementById("dynamic-header").innerText = question_text;
-    </script>
-    <div class="param-box">
-        <h2 id="dynamic-header"></h2> <!-- This will show the question text -->
+    <!-- PARAM1 -->
+    <br />
+    <label id="param1-min-value">No</label>
+    <input id="param1" min="0" max="1" type="range" value="0" />
+    <label id="param1-max-value">Yes</label>
+    <br />
 
-        <!-- PARAM1 -->
-        <br />
-        <label id="param1-min-value">No</label>
-        <input id="param1" min="0" max="1" type="range" value="0" />
-        <label id="param1-max-value">Yes</label>
-        <br />
-   
-    <script>
-        // Event listener for updating the displayed value for param1
-        document.getElementById("param1").addEventListener("input", function () {
-            // Get the value of the range (0 or 1)
-            const value = parseInt(this.value); // 0 corresponds to "No", 1 corresponds to "Yes"
-            const displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
-            document.getElementById("param1-value").textContent = displayedValue; // Update the displayed value
-        });
-		
-    </script>
+    <!-- Popup for checking answers -->
+    <div class="popup" onclick="myFunction()">Check answer
+      <span class="popuptext" id="myPopup" onclick="nextLevel()"> Values are correct!<br />Proceed to the next stage
+      </span>
+    </div>
+  </div>
 
-    <br/>
-	<div class="popup" onclick="myFunction()">Check answer
-	        <span class="popuptext" id="myPopup" onclick="nextLevel()">
-	            Values are correct!<br/>
-	            Proceed to the next stage
-	        </span>
-	    </div>
-	
-	    <script>
-	        function myFunction() {
-	            var popup = document.getElementById("myPopup");
-	            popup.classList.toggle("show");
-	        }
-			function nextLevel()
-			{
-				let url = new URL(window.location.href);
-				url.searchParams.set('zoom', '1');
-				window.location.href = url.toString();
-			}
-	    </script>
-</div>
-
-<!-- INSERT VIEW BOX -->
-<div class="view-box">
+  <!-- VIEW BOX -->
+  <div class="view-box">
     <h2>INFO BOX</h2>
     <label>Solar mass:</label>
-    <br/>
+    <br />
     <label>Stellar effective temperature:</label>
-</div>
+  </div>
 
-<!-- INSERT SELECT BOX -->
-<div class="select-box">
+  <!-- SELECT BOX -->
+  <div class="select-box">
     <img id="telescope" src="png/telescope.png" class="selectable" style="width: 64px; height: 64px">
-    <script> 
-        document.getElementById("telescope").addEventListener("click", function() {
-            let url = new URL(window.location.href);
-			url.searchParams.set('zoom', '0');
-			window.location.href = url.toString();
-    	})
-    </script>
-    
     <img id="observatory" src="png/observatory.png" class="selectable hidden" style="width: 64px; height: 64px">
-    <script>
-        document.getElementById("observatory").addEventListener("click", function() {
-	    	let url = new URL(window.location.href);
-			url.searchParams.set('zoom', '1');
-			window.location.href = url.toString();
-     	})
-    </script>	
- 
     <img id="satellite" src="png/satellite.png" class="selectable hidden" style="width: 64px; height: 64px">
-    <script>
-        document.getElementById("satellite").addEventListener("click", function() {
-            let url = new URL(window.location.href);
-			url.searchParams.set('zoom', '2');
-			window.location.href = url.toString();
-        })
-    </script>
-</div>
+  </div>
 
-<body>
+  <!-- Main App -->
   <div id="app"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Get URL parameters and set question text
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
+    var zoom = parseInt(urlParams.get('zoom'));
+
+    var question_text;
+    switch (planetNr) {
+      case 1:
+        question_text = "Can this star support a habitable planet?";
+        break;
+      case 2:
+        question_text = "Could the exoplanet have survivable conditions?";
+        break;
+      default:
+        question_text = "Exploring planets!"; // Default question for other cases
+    }
+    document.getElementById("dynamic-header").innerText = question_text;
+  </script>
+
+  <script>
+    // Update displayed value for param1 when input changes
+    document.getElementById("param1").addEventListener("input", function() {
+      const value = parseInt(this.value); // 0 corresponds to "No", 1 corresponds to "Yes"
+      const displayedValue = value === 0 ? "No" : "Yes";
+      document.getElementById("param1-value").textContent = displayedValue;
+    });
+  </script>
+
+  <script>
+    // Function to show popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+
+    // Function to go to the next level
+    function nextLevel() {
+      let url = new URL(window.location.href);
+      url.searchParams.set('zoom', '1');
+      window.location.href = url.toString();
+    }
+  </script>
+
+  <script>
+    // Event listeners for select-box
+    document.getElementById("telescope").addEventListener("click", function() {
+      let url = new URL(window.location.href);
+      url.searchParams.set('zoom', '0');
+      window.location.href = url.toString();
+    });
+
+    document.getElementById("observatory").addEventListener("click", function() {
+      let url = new URL(window.location.href);
+      url.searchParams.set('zoom', '1');
+      window.location.href = url.toString();
+    });
+
+    document.getElementById("satellite").addEventListener("click", function() {
+      let url = new URL(window.location.href);
+      url.searchParams.set('zoom', '2');
+      window.location.href = url.toString();
+    });
+  </script>
+
+  <script>
+    // Update zoom level to show available options
+    if (zoom == 1) {
+      document.getElementById("observatory").classList.remove('hidden');
+    } else if (zoom == 2) {
+      document.getElementById("observatory").classList.remove('hidden');
+      document.getElementById("satellite").classList.remove('hidden');
+    }
+  </script>
 
   <!-- SHADERS -->
   <script type="x-shader/x-vertex" id="noise-functions">
