@@ -27,7 +27,7 @@
         opacity: 0.5; /* Make it semi-transparent */
         pointer-events: none; /* Disable click events */
     }
-	
+
   /* Popup container - can be anything you want */
   .popup {
     position: relative;
@@ -102,7 +102,7 @@
 
     <br/>
 	<div class="popup" onclick="myFunction()">Check answer
-	        <span class="popuptext" id="myPopup">
+	        <span class="popuptext" id="myPopup" onclick="nextLevel()">
 	            Values are correct!<br/>
 	            Proceed to the next stage
 	        </span>
@@ -113,6 +113,13 @@
 	            var popup = document.getElementById("myPopup");
 	            popup.classList.toggle("show");
 	        }
+			function nextLevel()
+			{
+				document.getElementById("observatory").className = "selectable";
+				let url = new URL(window.location.href);
+				url.searchParams.set('zoom', '1');
+				window.location.href = url.toString();
+			}
 	    </script>
 </div>
 
