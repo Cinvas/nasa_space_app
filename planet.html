@@ -34,6 +34,8 @@
 
     /* Popup container - can be anything you want */
     .popup {
+		left: 20px;
+		top: 10px;
       position: relative;
       display: inline-block;
       cursor: pointer;
@@ -41,7 +43,33 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    user-select: none; /* Prevent text selection */
+}
+
+/* Hover effect */
+.popup:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly bigger shadow on hover */
+}
+
+/* Active state (when clicked) */
+.popup:active {
+    background-color: #004080; /* Even darker shade */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
+    transform: translateY(1px); /* Slight push down */
+}
 
     /* The actual popup */
     .popup .popuptext {
@@ -54,9 +82,9 @@
       padding: 8px 0;
       position: absolute;
       z-index: 1;
-      bottom: -15px;
+      bottom: -10px;
       left: 225px;
-      margin-left: -80px;
+      margin-left: -60px;
     }
 
     /* Toggle this class - hide and show the popup */
@@ -122,6 +150,11 @@
 				{ solarMass: 0.79, stellarTemp: 4842 },
 				// Add more planets here
 			];
+		const questions = [
+			"Could this star support habitable planets?",
+			"Could the exoplanet be in the habitable zone?",
+			"Could the exoplanet have survivable conditions?"
+		]
 		if(planetNr === 1)
 		{
 			if(zoom === 0)
@@ -132,6 +165,7 @@
 				var stellarTemp = planetData[0].stellarTemp;
 				document.getElementById('solar-mass').textContent = `Solar mass: ${solarMass}`;
 				document.getElementById('stellar-temp').textContent = `Stellar effective temperature: ${stellarTemp}`;
+				document.getElementById('dynamic-header').textContent = questions[0];
 				
 			}
 			else if(zoom === 1)
@@ -139,11 +173,13 @@
 				
 				url.searchParams.set('zoom', '2');
 				url = url.toString();
+				document.getElementById('dynamic-header').textContent = questions[1];
 			}
 			else if(zoom === 2)
 			{
 				url = new URL('/console.html', window.location.origin);
     			url.searchParams.set('planet', '2');
+				document.getElementById('dynamic-header').textContent = questions[2];
 			}
 		}
 		else if(planetNr === 2)
@@ -156,16 +192,19 @@
 				const stellarTemp = planetData[1].stellarTemp;
 				document.getElementById('solar-mass').textContent = `Solar mass: ${solarMass}`;
 				document.getElementById('stellar-temp').textContent = `Stellar effective temperature: ${stellarTemp}`;
+				document.getElementById('dynamic-header').textContent = questions[0];
 			}
 			else if(zoom === 1)
 			{
 				url.searchParams.set('zoom', '2');
 				url = url.toString();
+				document.getElementById('dynamic-header').textContent = questions[1];
 			}
 			else if(zoom === 2)
 			{
 				url = new URL('/console.html', window.location.origin);
     			url.searchParams.set('planet', '2');
+				document.getElementById('dynamic-header').textContent = questions[2];
 			}
 		}
 
