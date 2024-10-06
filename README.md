@@ -1,9 +1,21 @@
-# threejs-procedural-planets
+
+# NASA Space App Challenge 
+
 
 A procedural planet generator written using Three.js.
 
-# Live Demo
+# How to run
+1) To install node modules for project
+```
+npm install
+```
+2) To run the project in localhost
+```
+npm run dev
+```
 
+# Live Demo
+Here you can find the project where the planet visualization was taken.
 https://dgreenheck.github.io/threejs-procedural-planets/
 
 # Examples
@@ -12,8 +24,4 @@ https://dgreenheck.github.io/threejs-procedural-planets/
 
 ![Screenshot 2023-12-11 092444](https://github.com/dgreenheck/threejs-procedural-planets/assets/3814912/8d3de1e3-b339-4f22-8276-41ddbe55da4d)
 
-# To-Do
 
-- [ ] Improve atmosphere performance
-- [ ] Fix texture scaling issues for clouds by switching from points to quads
-- [ ] Add option for ridged fractal noise
