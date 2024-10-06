@@ -78,6 +78,12 @@
   </head>
 
 </head>
+<script>
+	const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
+    var zoom = parseInt(urlParams.get('zoom'));
+</script>
 <div class="param-box">
     
     <h2>Can this star support a habitable planet?</h2>
@@ -531,10 +537,6 @@
     }
   </script>
 <script>
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	var planetNr = parseInt(urlParams.get('planet'));
-	var zoom = parseInt(urlParams.get('zoom'));
 	
 	if(zoom == 1)
 	{

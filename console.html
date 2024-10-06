@@ -176,6 +176,26 @@
         </div>
 
 		<script>
+			window.addEventListener('load', () => {
+            	initRocket();
+        	});
+			const queryString = window.location.search;
+    		const urlParams = new URLSearchParams(queryString);
+    		var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
+
+			function initRocket()
+			{
+				const initialState = urlParams.get("planet") === '1';
+				rocketPosition = parseInt(urlParams.get("planet"))-1;
+				if (initialState === '1')
+				{
+					localStorage.setItem('rocketPosition', rocketPosition);
+				}
+				if (urlParams.get("planet") === '2') {
+					document.getElementById('planet2').classList.remove('disabled');
+				}
+			}
+
 			function selectPlanet(planetNumber) {
             if (planetNumber === 2 && rocketPosition < 1) {
                 alert("You need to unlock this planet first!");
