@@ -91,7 +91,7 @@
         var question_text;
         switch (planetNr) {
             case 1:
-                question_text = "Can this star support a habitable planet?";
+                question_text = "Could this star support a habitable planet?";
                 break;
             case 2:
                 question_text = "Could the exoplanet have survivable conditions?";
@@ -100,6 +100,18 @@
                 question_text = "Exploring planets!"; // Default question for other cases
             }
          document.getElementById("dynamic-header").innerText = question_text;
+	function loadScene() {
+
+    		const dynamicHeader = document.getElementById('dynamic-header');
+    		switch (planetNr) {
+	        case 1:
+            		dynamicHeader.innerText = "Can this star support a habitable planet?";
+            		break;
+        	case 2:
+            		dynamicHeader.innerText = "Could the exoplanet have survivable conditions?";
+            		break;
+    		}
+	}
     </script>
     <div class="param-box">
         <h2 id="dynamic-header"></h2> <!-- This will show the question text -->
@@ -111,36 +123,97 @@
         <label id="param1-max-value">Yes</label>
         <br />
    
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Param1 Check</title>
+    <style>
+        .popup {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .popuptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .popuptext.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Can this star support a habitable planet?</h2>
+
+    <!-- 
+    <br />
+    <label id="param1-min-value">No</label>
+    <input id="param1" min="0" max="1" type="range" value="0" />
+    <label id="param1-max-value">Yes</label>
+    <br />
+	-->
+    <!-- Display popup on button click 
+    <div class="popup" onclick="myFunction()">Check answer</div>
+    <span class="popuptext" id="myPopup"></span>
+    -->
     <script>
+        let displayedValue = "No"; // Default value
+
         // Event listener for updating the displayed value for param1
         document.getElementById("param1").addEventListener("input", function () {
             // Get the value of the range (0 or 1)
             const value = parseInt(this.value); // 0 corresponds to "No", 1 corresponds to "Yes"
-            const displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
-            document.getElementById("param1-value").textContent = displayedValue; // Update the displayed value
+            displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
+            console.log("Slider value:", displayedValue); // For debugging
         });
-		
-    </script>
-
-    <br/>
-	<div class="popup" onclick="myFunction()">Check answer
-	        <span class="popuptext" id="myPopup" onclick="nextLevel()">
-	            Values are correct!<br/>
-	            Proceed to the next stage
-	        </span>
-	    </div>
 	
-	    <script>
-	        function myFunction() {
-	            var popup = document.getElementById("myPopup");
-	            popup.classList.toggle("show");
-	        }
-			function nextLevel()
-			{
-				let url = new URL(window.location.href);
-				url.searchParams.set('zoom', '1');
-				window.location.href = url.toString();
-			}
+        function myFunction() {
+	       var popup = document.getElementById("myPopup");
+	       popup.classList.toggle("show");
+	       if (displayedValue === "Yes") {
+                    popup.textContent = "Values are correct! Proceed to the next stage.";
+                    popup.classList.add("show"); // Show popup
+                } else {
+                    popup.textContent = "The answer is incorrect. Please correct it.";
+                    popup.classList.add("show"); // Show popup
+                }
+
+                // Automatically hide popup after a few seconds
+                setTimeout(function () {
+                    popup.classList.remove("show");
+                }, 3000); // Hide after 3 seconds
+	   }
+	   function nextLevel() {
+		let url = new URL(window.location.href);
+		url.searchParams.set('zoom', '1');
+		window.location.href = url.toString();
+           }
 	    </script>
 </div>
 
