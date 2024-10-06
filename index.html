@@ -144,18 +144,40 @@
             right: 30px;
             z-index: 2;
         }
+	.content {
+            max-width: 1200px; /* Set a maximum width for the content */
+            margin: 0 auto; /* Center the content horizontally */
+            padding: 20px; /* Add padding around the content */
+            text-align: justify; /* Justify the text for a clean edge */
+            line-height: 1.6; /* Improve readability with line height */
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+        }
     </style>
 </head>
 <body>
 
     <canvas id="space"></canvas>
 
-    <div class="content">
-        <h1>Welcome to NASA Space App</h1>
-        <p>Explore the Universe from the comfort of your browser.</p>
-        <a class="nasa-button" href="/hub.html?planet=1">Start Exploring</a>
-		
-    </div>
+<div class="content">
+    <h1>Welcome to the virtual exoplanet observatory!</h1>
+    <p>
+        Congratulations! On your first day as an astronomy intern, you saved the main observatory telescope from crashing. 
+    </p>
+    <p>
+	The Habitable Worlds Observatory is a large infrared, optical, and ultraviolet space telescope concept. It would be the first space telescope specifically created to look for indications of habitability and life on planets around other stars.
+        Discovering life would represent a groundbreaking accomplishment worldwide. This "super-Hubble" would determine if Earth-like planets are common or uncommon. Its large mirror and ability to observe across ultraviolet to infrared wavelengths would offer significant capabilities for groundbreaking astrophysical research.
+    </p>
+
+    <p>
+        Using an interactive approach, we want to introduce the basic concepts of searching and exploring habitable planets. Visualizing a way to detect habitable exoplanets with technologies that range from simple “backyard“ telescopes to engineering marvels like the Kepler or Hubble that orbit the Earth.
+    </p>
+
+    <a class="nasa-button" href="/hub.html?planet=1">Start Exploring</a>
+    <br/>           
+</div>
 
     <!-- Popup HTML -->
     <div id="popup" class="display screen scanlines">
