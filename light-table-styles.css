@@ -220,14 +220,16 @@ ul {
 }
 
 #lt-readme {
+	height: 302px; /* Fixed height */
+    width: 100%; /* Full width */
     position: absolute;
     top: 60px;
-    overflow: hidden;
+	overflow-y: scroll;
+   
 }
 
 #lt-readme .content {
     height: 300px;
-    overflow: hidden;
 }
 #lt-mobile-readme {
     position: absolute;
