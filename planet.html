@@ -98,6 +98,7 @@
             const displayedValue = value === 0 ? "No" : "Yes"; // Determine the displayed value
             document.getElementById("param1-value").textContent = displayedValue; // Update the displayed value
         });
+		
     </script>
 
     <br/>
@@ -115,7 +116,6 @@
 	        }
 			function nextLevel()
 			{
-				document.getElementById("observatory").className = "selectable";
 				let url = new URL(window.location.href);
 				url.searchParams.set('zoom', '1');
 				window.location.href = url.toString();
@@ -535,6 +535,16 @@
 	const urlParams = new URLSearchParams(queryString);
 	var planetNr = parseInt(urlParams.get('planet'));
 	var zoom = parseInt(urlParams.get('zoom'));
+	
+	if(zoom == 1)
+	{
+		document.getElementById("observatory").className = "selectable";
+	}
+	else if(zoom == 2)
+	{
+		document.getElementById("observatory").className = "selectable";
+		document.getElementById("satellite").className = "selectable";
+	}
 </script>
 <script type="module" src="/scripts/main.js"></script>
 </body>
