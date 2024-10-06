@@ -1,20 +1,19 @@
 
 # NASA Space App Challenge 
-
-
-A procedural planet generator written using Three.js.
+## Navigator for the Habitable Worlds Observatory (HWO): Mapping the Characterizable Exoplanets in our Galaxy
 
 # How to run
-1) To install node modules for project
+1) Install node modules for project
 ```
 npm install
 ```
-2) To run the project in localhost
+2) To run the project on localhost you have to write this command on terminal
 ```
 npm run dev
 ```
 
 # Live Demo
+A procedural planet generator was written using Three.js.
 Here you can find the project where the planet visualization was taken.
 https://dgreenheck.github.io/threejs-procedural-planets/
 
