@@ -1,0 +1,197 @@
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>NASA Space App</title>
+        <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href="global.css" rel="stylesheet" type="text/css" />
+        <link href="light-table-styles.css" rel="stylesheet" type="text/css" />
+        <link href="boardroom-styles.css" rel="stylesheet" type="text/css" />
+        
+
+        <script src="encom-boardroom.min.js"></script>
+
+    </head>
+    <body>
+        <div id="light-table" style="visibility: visible; position: fixed; top: 397px; left: 178.5px; opacity: 1;">
+            <div id="lt-container-outside" class="container-border" style="position: fixed; top: 90px; left: 0px;">
+            </div>
+            <div id="lt-container-inside" class="container-border" style="position: fixed; top: 95px; left: 0px;"> 
+                <div id="lt-left-column">
+                    <div class="lt-header" id="lt-header-top-left" style="visibility: visible;">
+                        <div class="lt-header-left-section">HabEx <span class="alt-1">OS</span><span class="alt-2">12</span></div>
+                        <div class="lt-header-right-section">OS | 012</div>
+                    </div>
+
+                    <div id="lt-readme" class="content-container" style="height: 302px; width: 100%; top: 60px; left: 0px; opacity: 1; visibility: visible;">
+                        <div class="content">
+                            <h2 style="visibility: visible;">
+                                README <span class="alt-1">.TXT</span>
+                                <em>END. PROGRAM</em>
+                            </h2>
+                            <p style="visibility: visible;">
+								<strong>The Habitable Worlds Observatory</strong> is a large infrared, optical, and ultraviolet space telescope concept. It would be the first space telescope specifically created to look for indications of habitability and life on planets around other stars. Discovering life would represent a groundbreaking accomplishment worldwide. This "super-Hubble" would determine if Earth-like planets are common or uncommon. Its large mirror and ability to observe across ultraviolet to infrared wavelengths would offer significant capabilities for groundbreaking astrophysical research.
+                            </p>
+
+                            <p style="visibility: visible;">Now in the shoes of an astronomer you are given the task of searching the Cosmos for <strong>exoplanets</strong> suitable for life.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div id="lt-bandwidth" class="content-container" style="height: 125px; width: 100%; top: 390px; left: 0px; visibility: visible; opacity: 1;">
+                        <div class="content">
+                            <h2 style="visibility: visible;">
+                                DATA LINK <span class="alt-1" id="test-result">.TEST</span>
+                                <em id="datalink">DATALINK: <span id="datalink-status" style="color: rgb(255, 0, 0);">ERROR</span></em>
+                            </h2>
+                            <canvas height="100" width="367" id="lt-webglCanvas" style="visibility: visible;"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="lt-header" id="lt-header-bottom-left" style="visibility: visible;">
+                        <div class="lt-header-left-section">DOCKING CHANNEL</div>
+                        <div class="lt-header-right-section">
+                            <div id="lt-bottom-boxes-1"></div>
+                            <div id="lt-bottom-boxes-2"></div>
+                            <div id="lt-bottom-boxes-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="lt-header-animator-left lt-header-animator-inside" style="visibility: visible; top: 39px; height: 515px; display: none;"></div>
+                    <div class="lt-header-animator-left lt-header-animator-outside" style="visibility: visible; top: 25px; height: 543px; display: none;"></div>
+                </div>
+                <div id="lt-right-column">
+                    <div class="lt-header" id="lt-header-top-right" style="visibility: visible;">
+                        <div class="lt-header-left-section">CENTRAL SYSTEM DATA ... <span class="alt-1">LAUNCH HEBEX GLOBALIZATION</span></div>
+                        <div class="lt-header-right-section">OIA | 012</div>
+                    </div>
+                    <div id="lt-globalization" class="content-container" style="height: 262px; width: 100%; top: 60px; left: 0px; visibility: visible; opacity: 1;">
+                        <div class="content">
+                            <h2 style="visibility: visible;">
+                                HABITABLE EXOPLANET OBSERVATORY ... PLEASE SELECT DATA <span class="alt-1">.STREAM</span>
+                                <em>END. PROGRAM</em>
+                            </h2>
+
+
+                            <div id="lt-command-line" style="visibility: visible;">
+                                <div id="lt-command-line-header">
+                                    Last Login: Wed Nov 26 11:26:49 on llvm992
+                                </div>
+
+                                <div id="lt-command-lines">
+                                    <div class="command"><span class="prompt">hebex-sh:hebex_root$&nbsp;</span><span class="command-text"></span><span class="blink command-blinker">&nbsp;</span></div>
+                                </div>
+
+                            </div>
+							
+                            <div class="folder-container" id="planet1" onclick="selectPlanet(1)" style="visibility: visible;">
+                                <div class="folder-label">
+                                    Planet 1
+                                </div>
+                                <div class="folder-small"></div>
+                            </div>
+
+                            <div class="folder-container disabled" id="planet2" onclick="selectPlanet(2)" style="visibility: visible;">
+                                <div id="lt-folder-2" class="folder-label">
+                                    Planet 2
+                                </div>
+                                <div class="folder-small"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="lt-keyboard" style="opacity: 1;">
+                        <div id="k-27">ESC</div>
+                        <div id="k-49">1</div>
+                        <div id="k-50">2</div>
+                        <div id="k-51">3</div>
+                        <div id="k-52">4</div>
+                        <div id="k-53">5</div>
+                        <div id="k-54">6</div>
+                        <div id="k-55">7</div>
+                        <div id="k-56">8</div>
+                        <div id="k-57">9</div>
+                        <div id="k-48">0</div>
+                        <div id="k-189">_</div>
+                        <div id="k-8">BACK</div>
+
+                        <div id="k-9">TAB</div>
+                        <div id="k-81">q</div>
+                        <div id="k-87">w</div>
+                        <div id="k-69">e</div>
+                        <div id="k-82">r</div>
+                        <div id="k-84">t</div>
+                        <div id="k-89">y</div>
+                        <div id="k-85">u</div>
+                        <div id="k-73">i</div>
+                        <div id="k-79">o</div>
+                        <div id="k-80">p</div>
+                        <div id="k-219">()</div>
+
+                        <div id="k-500">CAPS</div>
+                        <div id="k-65">a</div>
+                        <div id="k-83">s</div>
+                        <div id="k-68">d</div>
+                        <div id="k-70">f</div>
+                        <div id="k-71">g</div>
+                        <div id="k-72">h</div>
+                        <div id="k-74">j</div>
+                        <div id="k-75">k</div>
+                        <div id="k-76">l</div>
+                        <div id="k-186">;</div>
+                        <div id="k-13">ENTER</div>
+
+                        <div id="k-16">SHIFT</div>
+                        <div id="k-90">z</div>
+                        <div id="k-88">x</div>
+                        <div id="k-67">c</div>
+                        <div id="k-86">v</div>
+                        <div id="k-66">b</div>
+                        <div id="k-78">n</div>
+                        <div id="k-77">m</div>
+                        <div id="k-188">,</div>
+                        <div id="k-190">.</div>
+                        <div id="k-191">/</div>
+                        <div id="k-0">SHIFT</div>
+
+                        <div id="k-32" style="width: 400px;"></div>
+                    </div>
+
+                    <div class="lt-header" id="lt-header-bottom-right" style="visibility: visible;">
+                        <div class="lt-header-left-section">TOUCHPOINT KEYBOARD ... <span class="alt-1">INTERACTION SEQUENCING</span></div>
+                        <div class="lt-header-right-section">SYS | O12</div>
+                    </div>
+
+                    <div class="lt-header-animator-right lt-header-animator-inside" style="visibility: visible; top: 39px; height: 515px; display: none;"></div>
+                    <div class="lt-header-animator-right lt-header-animator-outside" style="visibility: visible; top: 25px; height: 543px; display: none;"></div>
+                </div>
+
+                <div id="lt-far-right-column">
+                    <div id="lt-encom-logo">NASA</div>
+                    <img id="lt-thumbprint" src="nasa_logo.png">
+                </div>
+            </div>
+        </div>
+
+		<script>
+			function selectPlanet(planetNumber) {
+            if (planetNumber === 2 && rocketPosition < 1) {
+                alert("You need to unlock this planet first!");
+                return;
+            }
+            
+            if (rocketPosition < 2) {
+                rocketPosition++;
+                localStorage.setItem('rocketPosition', rocketPosition);
+                updateRocketPosition();
+            }
+            
+            // Redirect to planet page (you'll need to implement this page)
+            window.location.href = `/planet.html?planet=${planetNumber}&zoom=0`;
+        }
+		</script>
+        
+    </body>
+</html>
