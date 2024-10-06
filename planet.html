@@ -91,6 +91,14 @@
 
 <body style="text-align:left">
 
+	<!-- INSERT VIEW BOX -->
+	<div class="view-box">
+		<h2>Planet information:</h2>
+		<label id="solar-mass"></label>
+		<br/>
+		<label id="stellar-temp"></label>
+	</div>
+
   <!-- Dynamic Question Header -->
   <div class="param-box">
     <h2 id="dynamic-header"></h2> <!-- This will show the question text -->
@@ -108,35 +116,56 @@
 		const urlParams = new URLSearchParams(queryString);
 		var planetNr = parseInt(urlParams.get('planet')); // Correct variable name
 		var zoom = parseInt(urlParams.get('zoom'));
-
+		let url = new URL(window.location.href);
+		const planetData = [
+				{ solarMass: 0.72, stellarTemp: 4967 },
+				{ solarMass: 0.79, stellarTemp: 4842 },
+				// Add more planets here
+			];
 		if(planetNr === 1)
 		{
 			if(zoom === 0)
 			{
-
+				url.searchParams.set('zoom', '1');
+				url = url.toString();
+				var solarMass = planetData[0].solarMass;
+				var stellarTemp = planetData[0].stellarTemp;
+				document.getElementById('solar-mass').textContent = `Solar mass: ${solarMass}`;
+				document.getElementById('stellar-temp').textContent = `Stellar effective temperature: ${stellarTemp}`;
+				
 			}
 			else if(zoom === 1)
 			{
-
+				
+				url.searchParams.set('zoom', '2');
+				url = url.toString();
 			}
 			else if(zoom === 2)
 			{
-				
+				url = new URL('/console.html', window.location.origin);
+    			url.searchParams.set('planet', '2');
 			}
 		}
 		else if(planetNr === 2)
 		{
 			if(zoom === 0)
 			{
-
+				url.searchParams.set('zoom', '1');
+				url = url.toString();
+				const solarMass = planetData[1].solarMass;
+				const stellarTemp = planetData[1].stellarTemp;
+				document.getElementById('solar-mass').textContent = `Solar mass: ${solarMass}`;
+				document.getElementById('stellar-temp').textContent = `Stellar effective temperature: ${stellarTemp}`;
 			}
 			else if(zoom === 1)
 			{
-
+				url.searchParams.set('zoom', '2');
+				url = url.toString();
 			}
 			else if(zoom === 2)
 			{
-				
+				url = new URL('/console.html', window.location.origin);
+    			url.searchParams.set('planet', '2');
 			}
 		}
 
@@ -146,7 +175,7 @@
 	            Values are correct!<br/>
 	            Proceed to the next stage
 	        </span>
-	    </div>
+	</div>
   
 	    <script>
 	        function myFunction() {
@@ -155,20 +184,12 @@
 	        }
 			function nextLevel()
 			{
-				let url = new URL(window.location.href);
-				url.searchParams.set('zoom', '1');
-				window.location.href = url.toString();
+				window.location.href = url;
 			}
 	    </script>
 </div>
 
-<!-- INSERT VIEW BOX -->
-<div class="view-box">
-    <h2>Planet information:</h2>
-    <label>Solar mass: 0.72</label>
-    <br/>
-    <label>Stellar effective temperature: 4967</label>
-</div>
+
 
   <!-- SELECT BOX -->
   <div class="select-box">
